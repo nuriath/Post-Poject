@@ -8,7 +8,7 @@ urlpatterns=[
     url(r'^$',views.home,name = 'home'),
     url(r'^profile/', views.profile, name='profile'),
     url(r'^project/', views.project, name='project'),
-    url(r'^view_Project/', views.view_Project, name='view_Project'),
+    url(r'^view_Project/(\d+)', views.view_Project, name='view_Project'),
     url(r'^myProfile/(\d+)', views.myProfile, name='myProfile'),
    
 ]

@@ -33,6 +33,7 @@ class Profile(models.Model):
         return profiles
 
 class Project(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE,null = True)
     title = models.CharField(max_length=30)
     image = models.ImageField(upload_to = 'images/')
     description = models.TextField(max_length =1000)
@@ -43,9 +44,6 @@ class Project(models.Model):
 
     def save_project(self):
         self.save()
-
-    def delete_project(self):
-        self.delete()
 
     @classmethod
     def get_project(cls):

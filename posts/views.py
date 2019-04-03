@@ -8,9 +8,9 @@ from django.contrib.auth.models import User
 @login_required(login_url='/accounts/login/')
 def home(request):
     project = Project.objects.all()
-    profile = Profile.objects.all()
+    profiles = Profile.objects.all()
     
-    return render(request,'index.html',{"project":project,"profile":profile})
+    return render(request,'index.html',{"project":project,"profiles":profiles})
 
 @login_required(login_url='/accounts/login/')
 def myProfile(request,id):
