@@ -8,12 +8,9 @@ urlpatterns=[
     url(r'^$',views.home,name = 'home'),
     url(r'^profile/', views.profile, name='profile'),
     url(r'^project/', views.project, name='project'),
+    url(r'^view_Project/', views.view_Project, name='view_Project'),
     url(r'^myProfile/(\d+)', views.myProfile, name='myProfile'),
-    # url(r'^image/', views.image, name='image'),
-    # url(r'^comments/', views.comments, name='comments'),
-    # url(r'^view_comment/(\d+)', views.view_comment, name='view_comment'),
-    # url(r'^images/(\d+)',views.images,name ='images'),
-    # url(r'^like/',views.like,name ='like'),
+   
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

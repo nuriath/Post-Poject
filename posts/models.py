@@ -8,8 +8,10 @@ class Profile(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    prof_image = models.ImageField(upload_to = 'images/')
+    image = models.ImageField(upload_to = 'images/')
     bio = models.CharField(max_length =200)
+    project = models.CharField(max_length=30)
+    contact = models.CharField(max_length=30)
     
     def __str__(self):
         return self.first_name
@@ -54,3 +56,25 @@ class Project(models.Model):
     def search_by_username(cls,search_term):
         project = cls.objects.filter(title__icontains=search_term)
         return project
+
+class Rating(models.Model):
+    
+    design  = models.CharField(max_length=30)
+    usability = models.CharField(max_length=30)
+    content = models.CharField(max_length =200)
+    
+    def __str__(self):
+        return self.first_name
+
+    def save_rating(self):
+        self.save()
+
+    def delete_rating(self):
+        self.delete()
+
+    @classmethod
+    def get_rating(cls):
+        rating = cls.objects.all()
+        return rating
+
+    

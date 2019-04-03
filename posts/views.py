@@ -1,34 +1,21 @@
 from django.shortcuts import render,redirect
 from django.http  import HttpResponse,HttpResponseRedirect
-from .forms import ProfileForm,ProjectForm
-from .models import Profile,Project
+from .forms import ProfileForm,ProjectForm,RatingForm
+from .models import Profile,Project,Rating
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
 @login_required(login_url='/accounts/login/')
 def home(request):
-    images = Project.objects.all()
-
+    project = Project.objects.all()
     profile = Profile.objects.all()
-    return render(request,'index.html',{"images":images,"profile":profile})
-
-# @login_required(login_url='/accounts/login/')
-# def view_comment(request,image_id):
-#     image = Image.objects.get(id = image_id)
-#     comments = Comments.objects.filter(image = image.id).all() 
-#     likes = Like.objects.filter(image = image.id).all() 
-
-#     return render(request,'inde.html',{"image":image,"comments":comments,"likes":likes})
-
-# # @login_required(login_url='/accounts/login/')
-# def images(request,image_id):
-#     image = Image.objects.get(id = image_id)
-#     return render(request,"info.html", {"image":image})
+    
+    return render(request,'index.html',{"project":project,"profile":profile})
 
 @login_required(login_url='/accounts/login/')
 def myProfile(request,id):
-    user = User.objects.filter(id = id)
-    profiles = Profile.objects.filter(user = user)
+    user = User.objects.get(id = id)
+    profiles = Profile.objects.get(user = user)
    
     return render(request,'view_profile.html',{"profiles":profiles,"user":user,})
 
@@ -68,22 +55,22 @@ def view_Project(request,id):
     projects = Project.objects.get(user = user)
     images = Image.objects.filter(user = user).all()
    
-    return render(request,'view_profile.html',{"profiles":profiles,"user":user,"images":images})
+    return render(request,'view_project.html',{"user":user,"images":images})
 
-# def image(request):
-#     current_user = request.user
-#     if request.method == 'POST':
-#         form = ImageForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             image = form.save(commit=False)
-#             image.user = current_user
-#             image.save()
+def rating(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = RatingForm(request.POST, request.FILES)
+        if form.is_valid():
+            rating = form.save(commit=False)
+            rating.user = current_user
+            rating.save()
 
-#             return redirect(home)
+            return redirect(home)
 
-#     else:
-#         form = ImageForm()
-#     return render(request, 'new_image.html', {"form": form})
+    else:
+        form = RatingForm()
+    return render(request, 'comment.html', {"form": form})
 
 # def comments(request):
 #     current_user = request.user

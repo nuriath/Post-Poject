@@ -20,9 +20,9 @@
             <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo"><strong>{{project.title}}</strong> Album</button>
             <div id="demo" class="collapse">
              
-            {% for project in images %}
+            {% for profs in images %}
                
-               <img src="{{project.image.url}}">
+               <img src="{{profs.image.url}}">
    
             {% endfor %}         
                
