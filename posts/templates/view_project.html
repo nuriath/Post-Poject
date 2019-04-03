@@ -1,0 +1,36 @@
+{%extends 'base.html'%}
+
+{% block content %}
+{{block.super}}
+
+<body>
+    <div class = "container">
+    
+     <h3 class="row" style="color:rgb(41, 20, 24);"><strong>{{project.title}}</strong></h3>
+     <div>
+     
+        <img src="{{project.image.url}}" alt="Image">
+    </div>
+  
+    <p class="well" class="row" style="color:rgb(41, 20, 24);font-size: 20px;">{{project.description}}</p>
+ 
+   
+
+    <div class="well">
+            <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo"><strong>{{project.title}}</strong> Album</button>
+            <div id="demo" class="collapse">
+             
+            {% for project in images %}
+               
+               <img src="{{project.image.url}}">
+   
+            {% endfor %}         
+               
+            </div> 
+         </div>
+    
+    </div>  
+</body>
+
+</html>
+{% endblock %}
