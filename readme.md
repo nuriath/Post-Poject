@@ -44,4 +44,6 @@
 - Terminal
 - Python3.6(Flask)
 
-## SUPPORT AND CONTACT 
+## SUPPORT CONTACT 
+
+- E-mail:mnuriath28@gmail.com 
