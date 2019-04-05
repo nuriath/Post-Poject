@@ -17,7 +17,7 @@ def myProfile(request,id):
     user = User.objects.get(id = id)
     profiles = Profile.objects.get(user = user)
    
-    return render(request,'view_profile.html',{"profiles":profiles,"user":user,})
+    return render(request,'view_profile.html',{"profile":profiles,"user":user,})
 
 def profile(request):
     current_user = request.user
@@ -50,11 +50,19 @@ def project(request):
         form = ProjectForm()
     return render(request, 'project.html', {"form": form})
 
+# @login_required(login_url='/accounts/login/')
+# def view_Project(request,id):
+#     current_user = request.user
+#     images = Project.objects.filter(user = current_user).all()
+#     return render(request,'view_project.html',{"user":current_user,"images":images})
+
 @login_required(login_url='/accounts/login/')
 def view_Project(request,id):
-    current_user = request.user
-    images = Project.objects.filter(user = current_user).all()
-    return render(request,'view_project.html',{"user":current_user,"images":images})
+    user = User.objects.get(id = id)
+    images = Project.objects.filter(user = user).all()
+   
+    return render(request,'view_project.html',{"images":images,"user":user,})
+
 
 def rating(request):
     current_user = request.user
