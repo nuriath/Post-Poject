@@ -47,3 +47,6 @@
 ## SUPPORT CONTACT 
 
 - E-mail:mnuriath28@gmail.com 
+
+## LICENSE
+
