@@ -39,3 +39,7 @@
 - python3.6 manage.py runserver
 
 ## TECHNOLOGIES USED
+
+- Google chorome
+- Terminal
+- Python3.6(Flask)
