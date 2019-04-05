@@ -25,3 +25,6 @@
 
 ## TEST 
 
+- To run tests
+- In your terminal
+- $ python3.6 manage.py test pictures
