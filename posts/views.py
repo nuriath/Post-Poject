@@ -29,7 +29,7 @@ def profile(request):
             profile.user = current_user
             profile.save()
 
-        return redirect(home)
+        return redirect('home')
 
     else:
         form = ProfileForm()
@@ -44,40 +44,47 @@ def project(request):
             project.user = current_user
             project.save()
 
-        return redirect(home)
+        return redirect('home')
 
     else:
         form = ProjectForm()
     return render(request, 'project.html', {"form": form})
 
-# @login_required(login_url='/accounts/login/')
-# def view_Project(request,id):
-#     current_user = request.user
-#     images = Project.objects.filter(user = current_user).all()
-#     return render(request,'view_project.html',{"user":current_user,"images":images})
-
 @login_required(login_url='/accounts/login/')
-def view_Project(request,id):
-    user = User.objects.get(id = id)
-    images = Project.objects.filter(user = user).all()
-   
-    return render(request,'view_project.html',{"images":images,"user":user,})
+def view_project(request, id):
 
+    project=Project.objects.get(id=id)
+    votes = Votes.objects.filter(project = id).all() 
 
-def rating(request):
+    design=0
+    usability=0
+    content=0
+    num = len(votes)
+
+    for n in votes:
+        design+=round(n.design/num)
+        usability+=round(n.usability/num)
+        content+=round(n.content/num)
+    return render(request, 'view_project.html',{"project":project ,"votes":votes,"usability":usability,"design":design,"content":content})
+
+def votes(request,id):
     current_user = request.user
+    post = Project.objects.get(id=id)
+    votes = Votes.objects.filter(project=post)
+  
     if request.method == 'POST':
-        form = RatingForm(request.POST, request.FILES)
-        if form.is_valid():
-            rating = form.save(commit=False)
-            rating.user = current_user
-            rating.save()
-
-            return redirect(home)
-
+            vote = VotesForm(request.POST)
+            if vote.is_valid():
+                design = vote.cleaned_data['design']
+                usability = vote.cleaned_data['usability']
+                content = vote.cleaned_data['content']
+                rating = Votes(design=design,usability=usability,content=content,user=request.user,project=post)
+                rating.save()   
+                return redirect('picturesToday')
     else:
-        form = RatingForm()
-    return render(request, 'comment.html', {"form": form})
+        form = VotesForm()
+        return render(request, 'new_votes.html', {"form":form,'post':post,'user':current_user,'votes':votes})
+
 
 def search_results(request):
 
@@ -91,6 +98,37 @@ def search_results(request):
     else:
         message = "You haven't searched for any term"
         return render(request, 'all-photos/search.html',{"message":message})
+
+# @login_required(login_url='/accounts/login/')
+# def view_Project(request,id):
+#     current_user = request.user
+#     images = Project.objects.filter(user = current_user).all()
+#     return render(request,'view_project.html',{"user":current_user,"images":images})
+
+# @login_required(login_url='/accounts/login/')
+# def view_Project(request,id):
+#     user = User.objects.get(id = id)
+#     images = Project.objects.filter(user = user).all()
+   
+#     return render(request,'view_project.html',{"images":images,"user":user,})
+
+
+# def rating(request):
+#     current_user = request.user
+#     if request.method == 'POST':
+#         form = RatingForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             rating = form.save(commit=False)
+#             rating.user = current_user
+#             rating.save()
+
+#             return redirect(home)
+
+#     else:
+#         form = RatingForm()
+#     return render(request, 'comment.html', {"form": form})
+
+
 
     
 # def comments(request):
