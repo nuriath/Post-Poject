@@ -41,7 +41,7 @@ def project(request):
         form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
             project = form.save(commit=False)
-            project.user = self.request.current_user
+            project.user = current_user
             project.save()
 
         return redirect(home)

@@ -16,7 +16,4 @@ class RatingForm(forms.ModelForm):
         model = Rating
         exclude = ['user']
 
-# class LikeForm(forms.ModelForm):
-#     class Meta:
-#         model = Like
-#         exclude = ['user']
+
