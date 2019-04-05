@@ -20,7 +20,7 @@
 ## CLONING
 
 - $ source < name of virtual environment>/bin/activate
-- $ git clone:https://github.com/nuriath/Instagram-App.git
+- $ git clone:https://github.com/nuriath/Post-Poject.git
 - $ cd Instagram- App
 
 ## TEST 
