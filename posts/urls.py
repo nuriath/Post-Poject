@@ -13,7 +13,7 @@ urlpatterns=[
     url(r'^myProfile/(\d+)', views.myProfile, name='myProfile'),
     url(r'^search_results/', views.search_results, name='search_results'),
     url(r'^favicon\.ico$',RedirectView.as_view(url='/static/images/favicon.ico')),
-   
+   url(r'^api/profile/$', views.ProfileList.as_view())
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'bootstrap3',
     'posts.apps.PostsConfig',
     'tinymce',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

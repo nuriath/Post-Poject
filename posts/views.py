@@ -4,6 +4,11 @@ from .forms import ProfileForm,ProjectForm,RatingForm
 from .models import Profile,Project,Rating
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .models import  Profile,Project
+from .serializer import ProfileSerializer,ProjectSerializer
+
 
 @login_required(login_url='/accounts/login/')
 def home(request):
@@ -92,7 +97,12 @@ def search_results(request):
         message = "You haven't searched for any term"
         return render(request, 'all-photos/search.html',{"message":message})
 
-    
+class ProfileList(APIView):
+    def get(self, request, format=None):
+        all_profile = Profile.objects.all()
+        serializers = ProfileSerializer(all_profile, many=True)
+        return Response(serializers.data)
+
 # def comments(request):
 #     current_user = request.user
 #     if request.method == 'POST':
