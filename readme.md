@@ -37,3 +37,5 @@
 ## RUN THE APP
 
 - python3.6 manage.py runserver
+
+## TECHNOLOGIES USED
