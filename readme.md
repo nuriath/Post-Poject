@@ -50,3 +50,4 @@
 
 ## LICENSE
 
+-MIT Copyright (c) 2019 Mwangaza Nuriath
