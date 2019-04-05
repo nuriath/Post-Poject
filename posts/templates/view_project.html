@@ -4,7 +4,6 @@
 {{block.super}}
 
 
-{% for image in images}
 <body>
    <div class="container">
      
@@ -20,6 +19,7 @@
             {% for projs in images %}
 
             <img src="{{projs.image.url}}">
+            
 
             {% endfor %}
 
