@@ -22,3 +22,6 @@
 - $ source < name of virtual environment>/bin/activate
 - $ git clone:https://github.com/nuriath/Instagram-App.git
 - $ cd Instagram- App
+
+## TEST 
+
