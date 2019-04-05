@@ -13,3 +13,8 @@
 - Ubuntu Software
 - Python3.6
 - Postgres
+- Pip
+- Virtualenv
+- Django
+
+## CLONING
