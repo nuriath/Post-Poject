@@ -28,3 +28,8 @@
 - To run tests
 - In your terminal
 - $ python3.6 manage.py test pictures
+
+## RUN INITIAL MIGRATION
+
+- python3.6 manage.py makemigrations pictures
+- python3.6 manage.py migrate
