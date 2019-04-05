@@ -43,3 +43,5 @@
 - Google chorome
 - Terminal
 - Python3.6(Flask)
+
+## SUPPORT AND CONTACT 
