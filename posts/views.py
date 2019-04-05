@@ -50,12 +50,11 @@ def project(request):
         form = ProjectForm()
     return render(request, 'project.html', {"form": form})
 
+@login_required(login_url='/accounts/login/')
 def view_Project(request,id):
-    user = User.objects.get(id = id)
-    projects = Project.objects.get(user = user)
-    images = Image.objects.filter(user = user).all()
-   
-    return render(request,'view_project.html',{"user":user,"images":images})
+    current_user = request.user
+    images = Project.objects.filter(user = current_user).all()
+    return render(request,'view_project.html',{"user":current_user,"images":images})
 
 def rating(request):
     current_user = request.user
@@ -72,6 +71,20 @@ def rating(request):
         form = RatingForm()
     return render(request, 'comment.html', {"form": form})
 
+def search_results(request):
+
+    if 'title' in request.GET and request.GET["title"]:
+        search_term = request.GET.get("title")
+        searched_project = Project.search_by_title(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'all-photos/search.html',{"message":message,"image": searched_project})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'all-photos/search.html',{"message":message})
+
+    
 # def comments(request):
 #     current_user = request.user
 #     if request.method == 'POST':

@@ -51,9 +51,11 @@ class Project(models.Model):
         return project
 
     @classmethod
-    def search_by_username(cls,search_term):
+    def search_by_title(cls,search_term):
         project = cls.objects.filter(title__icontains=search_term)
         return project
+
+    
 
 class Rating(models.Model):
     
